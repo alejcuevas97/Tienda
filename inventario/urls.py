@@ -4,9 +4,10 @@ from .views import TiendaApiViews, TiendaApiViewsDetail
 
 
 urlpatternsPerson = [
-    
+    #ruta para consultar y agregar 
     path('v1/tienda/', TiendaApiViews.as_view()),
     
+    #ruta para trabajr con todo  por lo relacionado con id
     path('v1/tienda/<int:id>', TiendaApiViewsDetail.as_view()),
     
     

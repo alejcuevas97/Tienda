@@ -7,11 +7,12 @@ from .serializers import UserSerializersProd
 
 #vistas para consultar todos los productos
 class TiendaApiViews(APIView):
+    #lo utilizo para consultar datos
     def get(self,request):
         serial= UserSerializersProd(Producto.objects.all(), many=True)
         return Response(status=status.HTTP_200_OK, data=serial.data)
         
-    
+    #lo utilizo para ingresar datos
     def post(self,request):
         serial=UserSerializersProd(data=request.data)
         serial.is_valid(raise_exception=True)
@@ -19,19 +20,20 @@ class TiendaApiViews(APIView):
         return Response(status=status.HTTP_201_CREATED, data=serial.data)
 
 class TiendaApiViewsDetail(APIView):
-    
+    #lo utilizo para consultar todos los objectos
     def get_object(self,pk):
         all= Producto
         try:
             return all.objects.get( pk=pk)
         except all.DoesNotExist:
             return None
-    
+    #utilizo para consultar por el ID
     def get(self,request,id):
         post= self.get_object(id)
         serial=UserSerializersProd(post)
         return Response(status=status.HTTP_200_OK, data=serial.data)
     
+    #utilizo para actualizar por el id
     def put(self,request,id):
         post=self.get_object(id)
         if(post==None):
@@ -42,6 +44,7 @@ class TiendaApiViewsDetail(APIView):
             return Response(status=status.HTTP_200_OK, data=serial.data)
         return Response(serial.errors,status=status.HTTP_400_BAD_REQUEST)
     
+    #utilizo para borrar por el id
     def delete(self,request,id):
         producto=self.get_object(id)
         producto.delete()

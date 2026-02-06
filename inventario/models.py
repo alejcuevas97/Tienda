@@ -16,5 +16,6 @@ class Producto(models.Model):
         verbose_name='Producto'
         verbose_name_plural='Producto infos'
     
+    #lo utilizo para ordenar por fecha de registro
     class Meta:
         ordering= ['fecha_de_registro']

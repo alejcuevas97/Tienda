@@ -11,7 +11,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 
 
-#Se crea para introducior los datos de usuario y contrasena
+#Se crea para introducir los datos de usuario y contrasena
 @api_view(['POST'])
 def register(request):
     serial= UserAuthSerializers(data=request.data)
